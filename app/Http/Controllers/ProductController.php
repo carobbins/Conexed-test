@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Http\Resources\ProductResources;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return ProductResource::collection(Product::all());
     }
 
     /**
@@ -27,20 +28,25 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'description' => 'required'
         ]);
-        return Product::create($request->all());
+        $product = Product::create($request->all());
+
+        if($request->hasFile('images')) {
+            ProductImagesController::store($request,$product->id);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Product  $product
+     * @return ProductResource
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        return Product::find($id);
+        return new ProductResource($product);
     }
 
     /**
@@ -54,7 +60,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->update($request->all());
-        return $product;
+        if($request->hasFile('images')) {
+            ProductImagesController::store($request,$product->id);
+        }
+        return new ProductResource($product);
     }
 
     /**

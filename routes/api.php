@@ -1,6 +1,9 @@
 <?php
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImagesController;
+use App\Http\Resources\ProductResource;
 use App\Http\Controllers\AuthController;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,19 +20,23 @@ use Illuminate\Support\Facades\Route;
 
 //Route::resource('/products',ProductController::class);
 
-// Public Routes
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
-Route::get('/products/search/{name}', [ProductController::class, 'search']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
+// // Public Routes
+//  Route::get('/products', function(){
+//     return ProductResource::collection(Product::all());
+//  });// [ProductController::class, 'index']);
+Route::get('/products', 'ProductController@index');
+// Route::get('/products/{product}', [ProductController::class, 'show']);
+// Route::get('/products/search/{name}', [ProductController::class, 'search']);
+// Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/login', [AuthController::class, 'login']);
+//Route::apiResource('/products', [ProductController::class, 'index']);
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{id}', [ProductController::class, 'update']);
-    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    Route::put('/products/{product}', [ProductController::class, 'update']);
+    Route::put('/products/{product}/addImage', [ProductImagesController::class, 'update']);
+    Route::delete('/products/{product}/image', [ProductImagesController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

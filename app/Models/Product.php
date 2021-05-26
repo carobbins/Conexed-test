@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductImages;
 
 class Product extends Model
 {
@@ -13,4 +14,9 @@ class Product extends Model
         'description',
         'price'
     ];
+
+    public function images()
+    {
+        return $this->hasMany(ProductImages::class);
+    }
 }
