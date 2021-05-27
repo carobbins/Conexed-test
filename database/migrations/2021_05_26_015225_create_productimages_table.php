@@ -17,7 +17,7 @@ class CreateProductimagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id')->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->string('image_path');
+            $table->string('image_filename');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateProductimagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('productimages');
+        Schema::dropIfExists('product_images');
     }
 }

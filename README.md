@@ -1,3 +1,29 @@
+
+## Installation Instructions 
+
+Get Conexed-Test repoistory for GitHub:
+https://github.com/carobbins/Conexed-test.git
+
+
+Install MySQL Database and as the following
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=conexed
+DB_USERNAME=root
+DB_PASSWORD=PlayMYSWL
+
+(or create a MySQL database on existing server and reflect the database information in the .env and database.php file)
+Other databases can be used (beauty of an MVC) but settings need to reflect accordingly.
+
+Create an 'images' directory inside the 'public' folder to store images for the products, the confirm web user has read/write privilges to the directory
+
+Setup and Seed database tables run:
+php artisan migrate --seed
+
+API Authentication
+The seed will create an Admin user with email of 'admin@site.com' and password of 'password' 
+alternativly a register function does exists to create 
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
@@ -60,22 +86,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## Installation Instructions 
-
-Get Conexed-Test repoistory for GitHub:
-https://github.com/carobbins/Conexed-test.git
-
-Install MySQL Database and as the following
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=conexed
-DB_USERNAME=root
-DB_PASSWORD=PlayMYSWL
-
-(or create a MySQL database on existing server and reflect the database information in the .env and database.php file)
-Other databases can be used (beauty of an MVC) but settings need to reflect accordingly.  For this exersice I will not get into that
-
-
-
-

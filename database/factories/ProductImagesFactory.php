@@ -24,7 +24,7 @@ class ProductImagesFactory extends Factory
     {
         return [
             //'product_id' => Product::all()->random()->id,
-            'image_path' => $this->faker->image(public_path('images'),640,480, null, false)
+            'image_filename' => $this->faker->image(public_path('images'),640,480, null, false)
         ];
     }
 }

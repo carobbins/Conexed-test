@@ -29,16 +29,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $ret_msg = '';
+        
+        $validate = $request->validate([
             'name' => 'required',
             'price' => 'required',
             'description' => 'required'
         ]);
+        
         $product = Product::create($request->all());
 
-        if($request->hasFile('images')) {
-            ProductImagesController::store($request,$product->id);
+        if($files = $request->file('images')){
+            $ret_msg .= 'Attempting to save images';
+            return ['files' =>$files];
+            $ret = ProductImagesController::storeImages($files, $product);
+            return $ret;
+            $ret_msg .= $ret->message;
         }
+
+        return ['message' => $ret_msg];
+        
     }
 
     /**
