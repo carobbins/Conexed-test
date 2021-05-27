@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
     {
         $products = Product::factory()
                 ->count(50)
-                ->has(ProductImages::factory()->count(2),'images')
+                ->has(ProductImages::factory()->count(rand(0,2)),'images')
                 ->create();
         
     }

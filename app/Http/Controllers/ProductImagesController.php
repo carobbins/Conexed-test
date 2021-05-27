@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request, App\Product;
+use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Http\Resources\Product\ProductImagesResource;
 
 class ProductImagesController extends Controller
 {
+    public function index(Product $product)
+    {
+        return ProductImagesResource::collection($product->images);
+    }
+
     public function store(Request $request, $product_id)
     {
         $reponse_message = '';

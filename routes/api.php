@@ -1,7 +1,8 @@
 <?php
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImagesController;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Product\ProductResource as ProductResource;
+use App\Http\Resources\Product\ProductCollection as ProductCollection;
 use App\Http\Controllers\AuthController;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -20,12 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 //Route::resource('/products',ProductController::class);
 
-// // Public Routes
-//  Route::get('/products', function(){
-//     return ProductResource::collection(Product::all());
-//  });// [ProductController::class, 'index']);
-Route::get('/products', 'ProductController@index');
-// Route::get('/products/{product}', [ProductController::class, 'show']);
+// Public Routes
+// Route::get('/products', function(){
+//     return new ProductCollection::collection(Product::all());
+//  });
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{product}', [ProductController::class, 'show']);
+//Route::get('/products/{product}', function());
 // Route::get('/products/search/{name}', [ProductController::class, 'search']);
 // Route::post('/register', [AuthController::class, 'register']);
 // Route::post('/login', [AuthController::class, 'login']);
