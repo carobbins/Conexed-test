@@ -12,6 +12,9 @@ DB_DATABASE=conexed
 DB_USERNAME=root
 DB_PASSWORD=PlayMYSWL
 
+For PHPUnit, same info except
+DB_DATABASE=conexed_testing_db
+
 (or create a MySQL database on existing server and reflect the database information in the .env and database.php file)
 Other databases can be used (beauty of an MVC) but settings need to reflect accordingly.
 
