@@ -4,6 +4,7 @@
 Get Conexed-Test repoistory for GitHub:
 https://github.com/carobbins/Conexed-test.git
 
+Inside the base directory run: composer install
 
 Install MySQL Database and as the following
 DB_HOST=127.0.0.1

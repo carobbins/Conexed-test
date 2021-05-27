@@ -25,14 +25,15 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        $token = $user->createToken('conexeds')->plainTextToken;
+        $access_token = $user->createToken('conexeds')->plainTextToken;
 
         $response = [
             'user' => $user,
-            'token' =>$token
+            'access_token' => $access_token,
+            'message' => 'Registration Successful'
         ];
 
-        return response($response,201);
+        return response($response, 201);
     }
 
     public function login(Request $request) 
@@ -50,19 +51,19 @@ class AuthController extends Controller
             return response(['message' => 'Invalid Credientals'], 401);
         }
 
-        $token = $user->createToken('conexeds')->plainTextToken;
+        $access_token = $user->createToken('conexeds')->plainTextToken;
 
         $response = [
             'user' => $user,
-            'token' =>$token
+            'access_token' => $access_token
         ];
 
-        return response($response,201);
+        return response(['user' => $user, 'access_token' => $access_token, 'message' => 'Login successfully'], 200);
     }
 
     public function logout(Request $request)
     {
         auth()->user()->tokens()->delete();
-        return ['message' => 'Logged out'];
+        return response(['message' => 'Logged out'], 200);
     }
 }
